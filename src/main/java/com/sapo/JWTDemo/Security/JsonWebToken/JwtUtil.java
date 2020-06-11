@@ -1,7 +1,6 @@
-package com.sapo.JWTDemo.Util;
+package com.sapo.JWTDemo.Security.JsonWebToken;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;

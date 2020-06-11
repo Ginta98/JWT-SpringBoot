@@ -1,13 +1,13 @@
-package com.sapo.JWTDemo.DTO;
+package com.sapo.JWTDemo.Security.JsonWebToken;
 
-public class AuthenicationRequest {
+public class JwtAuthenicationRequest {
     private String username;
     private String password;
 
-    public AuthenicationRequest() {
+    public JwtAuthenicationRequest() {
     }
 
-    public AuthenicationRequest(String username, String password) {
+    public JwtAuthenicationRequest(String username, String password) {
         this.username = username;
         this.password = password;
     }

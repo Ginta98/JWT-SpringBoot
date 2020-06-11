@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://128.199.239.13:3306/Sapo"/>
+        <property name="username" value="root"/>
+        <property name="password" value="gn1C4IrvFiGesuwK"/>
+    </bean>
+    <bean id="DAOProduct"
+          class="com.sapo.JWTDemo.DAO.ProductDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="DAOCategory"
+          class="com.sapo.JWTDemo.DAO.CategoryDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="DAOTransaction"
+          class="com.sapo.JWTDemo.DAO.TransactionDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="DAOStudent"
+          class="com.sapo.JWTDemo.DAO.StudentDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="DAOAccount"
+          class="com.sapo.JWTDemo.DAO.AccountDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+</beans>

@@ -23,6 +23,7 @@ public class JwtAuthenticateAPI {
     @Autowired
     private JwtUtil jwtTokenUtil;
 
+
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenicationToken(@RequestBody JwtAuthenicationRequest jwtAuthenicationRequest) throws Exception {
         try {
@@ -37,6 +38,7 @@ public class JwtAuthenticateAPI {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(jwtAuthenicationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
+
         return ResponseEntity.ok(new JwtAuthenicationResponse(jwt));
 
     }

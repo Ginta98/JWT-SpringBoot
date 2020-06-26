@@ -1,8 +1,9 @@
 package com.sapo.JWTDemo.Security.JsonWebToken;
 
+import com.sapo.JWTDemo.DTO.Account;
+
 public class JwtAuthenicationResponse {
     private final String jwt;
-
     public String getJwt() {
         return jwt;
     }

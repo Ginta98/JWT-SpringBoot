@@ -29,12 +29,12 @@ public class JwtSecurityConfigure extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/authenticate").permitAll()
-                .antMatchers(HttpMethod.POST,"/account_regist").permitAll()
-                .antMatchers(HttpMethod.GET,"/hello").access("hasAnyRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.GET,"/account_list").access("hasAnyRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
+                .antMatchers(HttpMethod.POST, "/account_regist").permitAll()
+                .antMatchers(HttpMethod.GET, "/hello").access("hasAnyRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.GET, "/account_list").access("hasAnyRole('ROLE_ADMIN')")
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

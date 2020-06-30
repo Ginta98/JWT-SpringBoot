@@ -31,15 +31,16 @@ public class JwtAuthenticateAPI {
                     new UsernamePasswordAuthenticationToken(jwtAuthenicationRequest.getUsername()
                             , jwtAuthenicationRequest.getPassword())
             );
+            final UserDetails userDetails = userDetailsService
+                    .loadUserByUsername(jwtAuthenicationRequest.getUsername());
+            final String jwt = jwtTokenUtil.generateToken(userDetails);
+
+            return ResponseEntity.ok(new JwtAuthenicationResponse(jwt));
         } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password", e);
 
+            return ResponseEntity.ok("Wrong");
         }
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(jwtAuthenicationRequest.getUsername());
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtAuthenicationResponse(jwt));
 
     }
 

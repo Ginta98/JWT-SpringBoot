@@ -20,21 +20,20 @@ import java.util.List;
 public class JwtUserDetailsService implements UserDetailsService {
     ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
     AccountDAO accountDAO = (AccountDAO) context.getBean("DAOAccount");
-
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Account account = accountDAO.getAccountByUsername(userName);
         System.out.println(account.toString());
-        List<String> roles = null;
+        List<String> roles = new ArrayList<>();
         if (account != null) {
             roles = accountDAO.getRoles(account.getId());
         }
+        System.out.println(roles.toString());
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         if (roles != null) {
             for (String role : roles) {
                 GrantedAuthority authority = new SimpleGrantedAuthority(role);
                 grantList.add(authority);
-                System.out.println("role:"+role);
             }
         }
         return new User(account.getUsername(), account.getPassword(), grantList);

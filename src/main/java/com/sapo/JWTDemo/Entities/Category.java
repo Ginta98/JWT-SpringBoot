@@ -1,4 +1,4 @@
-package com.sapo.JWTDemo.DTO;
+package com.sapo.JWTDemo.Entities;
 
 public class Category {
     int id;

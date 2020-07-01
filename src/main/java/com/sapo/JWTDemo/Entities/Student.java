@@ -1,11 +1,8 @@
-package com.sapo.JWTDemo.DTO;
+package com.sapo.JWTDemo.Entities;
 
-public class Account {
-    int id;
-    String username,password;
-
-    public Account() {
-    }
+public class Student {
+    int id, age;
+    String name, username, password;
 
     public int getId() {
         return id;
@@ -15,13 +12,20 @@ public class Account {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {
@@ -40,8 +44,13 @@ public class Account {
         this.password = password;
     }
 
-    public Account(int id, String username, String password) {
+    public Student() {
+    }
+
+    public Student(int id, int age, String name, String username, String password) {
         this.id = id;
+        this.age = age;
+        this.name = name;
         this.username = username;
         this.password = password;
     }

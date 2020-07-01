@@ -2,7 +2,7 @@ package com.sapo.JWTDemo.Controller;
 
 
 import com.sapo.JWTDemo.DAO.ProductDAO;
-import com.sapo.JWTDemo.DTO.Product;
+import com.sapo.JWTDemo.Entities.Product;
 import com.sapo.JWTDemo.DTO.ProductMessageForm;
 import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;

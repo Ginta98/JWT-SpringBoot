@@ -2,7 +2,7 @@ package com.sapo.JWTDemo.Security.JsonWebToken;
 
 
 import com.sapo.JWTDemo.DAO.AccountDAO;
-import com.sapo.JWTDemo.DTO.Account;
+import com.sapo.JWTDemo.Entities.Account;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.GrantedAuthority;

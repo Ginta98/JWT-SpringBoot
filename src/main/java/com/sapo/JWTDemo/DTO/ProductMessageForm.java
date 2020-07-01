@@ -1,5 +1,7 @@
 package com.sapo.JWTDemo.DTO;
 
+import com.sapo.JWTDemo.Entities.Product;
+
 import java.util.List;
 
 

@@ -40,7 +40,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             // get authority from token, then add into new UserDetail
-            String grantListGetFromClaims = jwtUtil.extractAllClaims(jwt).get("roles").toString();
+            String grantListGetFromClaims = jwtUtil.extractRoles(jwt);
             List<GrantedAuthority> authorities = new ArrayList<>();
             // regex
             List<String> dataRoleForeach = new ArrayList<>();

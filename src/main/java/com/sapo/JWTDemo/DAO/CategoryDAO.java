@@ -1,6 +1,6 @@
 package com.sapo.JWTDemo.DAO;
 
-import com.sapo.JWTDemo.DTO.Category;
+import com.sapo.JWTDemo.Entities.Category;
 import com.sapo.JWTDemo.Mapper.CategoryMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -58,7 +58,7 @@ public class CategoryDAO {
     public List<Category> getAllCategory() {
         List<Category> categories = new ArrayList<>();
         try {
-            String sql = "select * from category";
+            String sql = "SELECT * from category ORDER BY id DESC";
             categories = jdbcTemplate.query(sql, new CategoryMapper());
             return categories;
         } catch (Exception e) {
@@ -68,10 +68,38 @@ public class CategoryDAO {
         }
     }
 
+    public List<Category> getCategoryByPage(int page) {
+
+        List<Category> categories = new ArrayList<>();
+        int number = 2;
+        try {
+            String sql = "select * from category order by id desc limit ?,?";
+            categories = jdbcTemplate.query(sql, new Object[]{page*number, number}, new CategoryMapper());
+
+        } catch (Exception e) {
+            System.out.println(e);
+
+        } finally {
+            return categories;
+        }
+    }
+
     public int updateCategory(int id, String name) {
         try {
             String sql = "update category set name =? where id = ?;";
             return jdbcTemplate.update(sql, name, id);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    public int getCategoryPageNumber() {
+        try {
+            int number = 2;
+            String sql = "Select count(id) from category";
+            double totalData = jdbcTemplate.queryForObject(sql, Integer.class);
+            int totalPage=(int) Math.ceil(totalData/number)-1;
+            return totalPage;
         } catch (Exception e) {
             return -1;
         }

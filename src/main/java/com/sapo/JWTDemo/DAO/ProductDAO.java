@@ -1,6 +1,6 @@
 package com.sapo.JWTDemo.DAO;
 
-import com.sapo.JWTDemo.DTO.Product;
+import com.sapo.JWTDemo.Entities.Product;
 import com.sapo.JWTDemo.Mapper.ProductMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 

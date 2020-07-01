@@ -1,6 +1,6 @@
 package com.sapo.JWTDemo.Mapper;
 
-import com.sapo.JWTDemo.DTO.Account;
+import com.sapo.JWTDemo.Entities.Account;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

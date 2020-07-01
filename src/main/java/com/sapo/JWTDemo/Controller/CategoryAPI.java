@@ -1,12 +1,12 @@
 package com.sapo.JWTDemo.Controller;
 
 import com.sapo.JWTDemo.DAO.CategoryDAO;
-import com.sapo.JWTDemo.DTO.Category;
+import com.sapo.JWTDemo.DTO.CategoryResponseDTO;
+import com.sapo.JWTDemo.Entities.Category;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +34,16 @@ public class CategoryAPI {
     @PutMapping
     public ResponseEntity<Integer> updateCategory(@RequestParam int id, @RequestParam String name) {
         return new ResponseEntity<>(categoryDAO.updateCategory(id, name), HttpStatus.OK);
+    }
+
+    @GetMapping("/category_page")
+    public ResponseEntity<CategoryResponseDTO> getCategoryByPage(@RequestParam String page) {
+        if (page.equals("")) {
+            page = "0";
+        }
+        List<Category> cats = categoryDAO.getCategoryByPage(Integer.valueOf(page));
+        int totalPage = categoryDAO.getCategoryPageNumber();
+        return new ResponseEntity<>(new CategoryResponseDTO(cats, totalPage), HttpStatus.OK);
     }
 
 }

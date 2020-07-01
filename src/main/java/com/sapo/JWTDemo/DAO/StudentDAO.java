@@ -1,6 +1,6 @@
 package com.sapo.JWTDemo.DAO;
 
-import com.sapo.JWTDemo.DTO.Student;
+import com.sapo.JWTDemo.Entities.Student;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 

@@ -1,6 +1,6 @@
 package com.sapo.JWTDemo.DAO;
 
-import com.sapo.JWTDemo.DTO.Account;
+import com.sapo.JWTDemo.Entities.Account;
 import com.sapo.JWTDemo.Mapper.AccountMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -1,14 +1,13 @@
 package com.sapo.JWTDemo.Controller;
 
 import com.sapo.JWTDemo.DAO.AccountDAO;
-import com.sapo.JWTDemo.DTO.Account;
+import com.sapo.JWTDemo.Entities.Account;
 import com.sapo.JWTDemo.Security.JsonWebToken.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

@@ -32,15 +32,17 @@ public class JwtAuthenticateAPI {
                     new UsernamePasswordAuthenticationToken(jwtAuthenicationRequest.getUsername()
                             , jwtAuthenicationRequest.getPassword())
             );
+            System.out.println("authen:" + authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(jwtAuthenicationRequest.getUsername()
+                            , jwtAuthenicationRequest.getPassword())
+            ).getClass().getName());
             final UserDetails userDetails = userDetailsService
                     .loadUserByUsername(jwtAuthenicationRequest.getUsername());
             final String jwt = jwtTokenUtil.generateToken(userDetails);
-            return ResponseEntity.ok(new JwtAuthenicationResponse(jwt,userDetails));
+            return ResponseEntity.ok(new JwtAuthenicationResponse(jwt, userDetails));
         } catch (BadCredentialsException e) {
             return new ResponseEntity<String>("Wrong username or password", HttpStatus.BAD_REQUEST);
         }
-
-
     }
 
     @GetMapping("/hello")

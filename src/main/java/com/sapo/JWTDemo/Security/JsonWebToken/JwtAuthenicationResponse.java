@@ -1,6 +1,5 @@
 package com.sapo.JWTDemo.Security.JsonWebToken;
 
-import com.sapo.JWTDemo.DTO.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

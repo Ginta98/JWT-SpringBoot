@@ -1,11 +1,12 @@
 package com.sapo.JWTDemo.Security.JsonWebToken;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,12 +23,20 @@ public class JwtUtil {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    public String extractRoles(String token){
+        return extractAllClaims(token).get("roles").toString();
+    }
+
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    public Claims extractAllClaims(String token) {
+    private Claims extractAllClaims(String token) {
+//       ArrayList<GrantedAuthority> roles = (ArrayList<GrantedAuthority>) Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().get("roles");
+//        System.out.println("claims:"+roles.get(0));
+//        System.out.println("claims:"+roles.get(1));
+//        System.out.println("claims:"+roles.get(2));
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
     private Boolean isTokenExpired(String token){
@@ -42,6 +51,9 @@ public class JwtUtil {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*12))
                 .signWith(SignatureAlgorithm.HS256,SECRET_KEY).compact();
+
+
+
     }
     public Boolean validateToken(String token){
         return (!isTokenExpired(token));

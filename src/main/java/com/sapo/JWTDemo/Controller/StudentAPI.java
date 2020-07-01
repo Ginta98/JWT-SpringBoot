@@ -1,7 +1,7 @@
 package com.sapo.JWTDemo.Controller;
 
 import com.sapo.JWTDemo.DAO.StudentDAO;
-import com.sapo.JWTDemo.DTO.Student;
+import com.sapo.JWTDemo.Entities.Student;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;

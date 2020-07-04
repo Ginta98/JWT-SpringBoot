@@ -23,12 +23,10 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Account account = accountDAO.getAccountByUsername(userName);
-        System.out.println(account.toString());
         List<String> roles = new ArrayList<>();
         if (account != null) {
             roles = accountDAO.getRoles(account.getId());
         }
-        System.out.println(roles.toString());
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         if (roles != null) {
             for (String role : roles) {

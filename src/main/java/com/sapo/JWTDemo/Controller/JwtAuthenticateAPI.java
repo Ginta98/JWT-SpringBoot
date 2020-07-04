@@ -11,6 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,16 +30,11 @@ public class JwtAuthenticateAPI {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenicationToken(@RequestBody JwtAuthenicationRequest jwtAuthenicationRequest) throws Exception {
         try {
-            authenticationManager.authenticate(
+           Authentication userAuthenticated = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(jwtAuthenicationRequest.getUsername()
                             , jwtAuthenicationRequest.getPassword())
             );
-            System.out.println("authen:" + authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(jwtAuthenicationRequest.getUsername()
-                            , jwtAuthenicationRequest.getPassword())
-            ).getClass().getName());
-            final UserDetails userDetails = userDetailsService
-                    .loadUserByUsername(jwtAuthenicationRequest.getUsername());
+            final UserDetails userDetails = new User(userAuthenticated.getName(),"secret",userAuthenticated.getAuthorities());
             final String jwt = jwtTokenUtil.generateToken(userDetails);
             return ResponseEntity.ok(new JwtAuthenicationResponse(jwt, userDetails));
         } catch (BadCredentialsException e) {

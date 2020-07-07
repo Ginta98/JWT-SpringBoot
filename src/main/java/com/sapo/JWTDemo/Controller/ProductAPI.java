@@ -4,7 +4,7 @@ package com.sapo.JWTDemo.Controller;
 import com.sapo.JWTDemo.DAO.ProductDAO;
 import com.sapo.JWTDemo.Entities.Product;
 import com.sapo.JWTDemo.DTO.ProductMessageForm;
-import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -15,8 +15,8 @@ import java.util.List;
 
 @RestController
 public class ProductAPI {
-    ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-    ProductDAO productDAO = (ProductDAO) context.getBean("DAOProduct");
+    @Autowired
+    ProductDAO productDAO;
 
     @GetMapping("/product")
     public List<Product> getAllProduct() {
@@ -35,20 +35,20 @@ public class ProductAPI {
         return new ResponseEntity<Product>(productDAO.searchProduct(id), HttpStatus.OK);
     }
 
-    @PutMapping("/product")
-    public ResponseEntity<JSONObject> updateProduct(@RequestParam int id, String name) {
-        if (productDAO.updateProduct(id, name) == 1) {
-            productDAO.updateProduct(id, name);
-            JSONObject res = new JSONObject();
-            res.put("message", "Success");
-            return new ResponseEntity<>(res, HttpStatus.OK);
-        } else {
-            productDAO.updateProduct(id, name);
-            JSONObject res = new JSONObject();
-            res.put("message", "Fail");
-            return new ResponseEntity<>(res, HttpStatus.OK);
-        }
-    }
+//    @PutMapping("/product")
+//    public ResponseEntity<JSONObject> updateProduct(@RequestParam int id, String name) {
+//        if (productDAO.updateProduct(id, name) == 1) {
+//            productDAO.updateProduct(id, name);
+//            JSONObject res = new JSONObject();
+//            res.put("message", "Success");
+//            return new ResponseEntity<>(res, HttpStatus.OK);
+//        } else {
+//            productDAO.updateProduct(id, name);
+//            JSONObject res = new JSONObject();
+//            res.put("message", "Fail");
+//            return new ResponseEntity<>(res, HttpStatus.OK);
+//        }
+//    }
 
     @GetMapping("/product_pagination")
     public ResponseEntity<ProductMessageForm> getProductByPage(@RequestParam int page) {

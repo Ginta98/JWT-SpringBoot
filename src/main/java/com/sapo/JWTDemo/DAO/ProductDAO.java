@@ -2,20 +2,17 @@ package com.sapo.JWTDemo.DAO;
 
 import com.sapo.JWTDemo.Entities.Product;
 import com.sapo.JWTDemo.Mapper.ProductMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class ProductDAO {
-    private DataSource dataSource;
+    @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    public void setDataSource(DataSource data) {
-        this.dataSource = data;
-        this.jdbcTemplate = new JdbcTemplate(data);
-    }
 
     public boolean createProduct(Product product) {
         try {

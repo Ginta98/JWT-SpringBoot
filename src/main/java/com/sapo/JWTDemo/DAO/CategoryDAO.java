@@ -2,25 +2,23 @@ package com.sapo.JWTDemo.DAO;
 
 import com.sapo.JWTDemo.Entities.Category;
 import com.sapo.JWTDemo.Mapper.CategoryMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CategoryDAO {
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
-
-    public void setDataSource(DataSource data) {
-        this.dataSource = data;
-        this.jdbcTemplate = new JdbcTemplate(data);
-    }
-
+    @Autowired
+    JdbcTemplate jdbcTemplate;
     @Transactional(rollbackFor = Exception.class)
     public int deleteCategory(@RequestParam int id) {
 //        ApplicationContext contextTransaction = new ClassPathXmlApplicationContext("Beans.xml");
@@ -58,8 +56,15 @@ public class CategoryDAO {
     public List<Category> getAllCategory() {
         List<Category> categories = new ArrayList<>();
         try {
+//            StopWatch stopWatch = new StopWatch();
+//            stopWatch.start("first call db");
             String sql = "SELECT * from category ORDER BY id DESC";
             categories = jdbcTemplate.query(sql, new CategoryMapper());
+//            stopWatch.stop();
+//            stopWatch.start("second call db");
+//            List<Category> test = jdbcTemplate.query(sql, new CategoryMapper());
+//            stopWatch.stop();
+//            System.out.println(stopWatch.prettyPrint());
             return categories;
         } catch (Exception e) {
             return null;
@@ -71,7 +76,7 @@ public class CategoryDAO {
     public List<Category> getCategoryByPage(int page) {
 
         List<Category> categories = new ArrayList<>();
-        int number = 2;
+        int number = 8;
         try {
             String sql = "select * from category order by id desc limit ?,?";
             categories = jdbcTemplate.query(sql, new Object[]{page*number, number}, new CategoryMapper());
@@ -95,7 +100,7 @@ public class CategoryDAO {
 
     public int getCategoryPageNumber() {
         try {
-            int number = 2;
+            int number = 8;
             String sql = "Select count(id) from category";
             double totalData = jdbcTemplate.queryForObject(sql, Integer.class);
             int totalPage=(int) Math.ceil(totalData/number)-1;

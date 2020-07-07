@@ -3,6 +3,7 @@ package com.sapo.JWTDemo.Security.JsonWebToken;
 
 import com.sapo.JWTDemo.DAO.AccountDAO;
 import com.sapo.JWTDemo.Entities.Account;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,8 +19,8 @@ import java.util.List;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
-    ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-    AccountDAO accountDAO = (AccountDAO) context.getBean("DAOAccount");
+    @Autowired
+    AccountDAO accountDAO;
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Account account = accountDAO.getAccountByUsername(userName);

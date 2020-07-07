@@ -3,6 +3,7 @@ package com.sapo.JWTDemo.Controller;
 import com.sapo.JWTDemo.DAO.CategoryDAO;
 import com.sapo.JWTDemo.DTO.CategoryResponseDTO;
 import com.sapo.JWTDemo.Entities.Category;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -13,8 +14,8 @@ import java.util.List;
 
 @RestController
 public class CategoryAPI {
-    ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-    CategoryDAO categoryDAO = (CategoryDAO) context.getBean("DAOCategory");
+    @Autowired
+    CategoryDAO categoryDAO;
 
     @DeleteMapping("/category/{id}")
     public ResponseEntity<Integer> deleteCategory(@PathVariable int id) {

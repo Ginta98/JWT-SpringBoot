@@ -15,8 +15,8 @@ import java.util.List;
 
 @RestController
 public class AccountAPI {
-    ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-    AccountDAO accountDAO = (AccountDAO) context.getBean("DAOAccount");
+    @Autowired
+    AccountDAO accountDAO;
 
     @Autowired
     private JwtUtil jwtUtil;

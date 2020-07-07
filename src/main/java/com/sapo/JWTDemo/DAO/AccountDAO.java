@@ -2,20 +2,17 @@ package com.sapo.JWTDemo.DAO;
 
 import com.sapo.JWTDemo.Entities.Account;
 import com.sapo.JWTDemo.Mapper.AccountMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
-
+@Repository
 public class AccountDAO {
-    private DataSource dataSource;
+    @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    public void setDataSource(DataSource data) {
-        this.dataSource = data;
-        this.jdbcTemplate = new JdbcTemplate(data);
-    }
 
     public Account getAccountByUsername(String username) {
         String sql = "Select * from account where username=?";

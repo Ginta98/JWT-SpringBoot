@@ -1,22 +1,20 @@
 package com.sapo.JWTDemo.DAO;
 
 import com.sapo.JWTDemo.Entities.Student;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
+@Repository
 public class StudentDAO {
-    private DataSource dataSource;
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(DataSource data) {
-        this.dataSource = data;
-        this.jdbcTemplate = new JdbcTemplate(data);
-    }
 
     public List<Student> getAllStudents() {
         String query = "Select * from Student;";

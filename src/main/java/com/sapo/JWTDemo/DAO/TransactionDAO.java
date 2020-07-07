@@ -1,17 +1,16 @@
 package com.sapo.JWTDemo.DAO;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-
+@Repository
 public class TransactionDAO {
-    private DataSource dataSource;
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(DataSource data) {
-        this.dataSource = data;
-        this.jdbcTemplate = new JdbcTemplate(data);
-    }
+
     public void turnOffAutoCommit() {
         String sql = "SET autocommit = 0;";
         jdbcTemplate.update(sql);

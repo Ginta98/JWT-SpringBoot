@@ -73,7 +73,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             // User has username, and authorities
             UserDetails userDetails = new User(username, "secret", authorities);
             if (jwtUtil.validateToken(jwt)) {
-                System.out.println("found User:" + userDetails.toString());
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken

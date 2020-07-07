@@ -19,6 +19,9 @@ import java.util.List;
 public class CategoryDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    ProductDAO productDAO;
     @Transactional(rollbackFor = Exception.class)
     public int deleteCategory(@RequestParam int id) {
 //        ApplicationContext contextTransaction = new ClassPathXmlApplicationContext("Beans.xml");
@@ -34,9 +37,7 @@ public class CategoryDAO {
 //            transactionDAO.rollbackTransaction(); //rollback
 //            return -1;
 //
-        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-        ProductDAO productDAO = (ProductDAO) context.getBean("DAOProduct");
-        productDAO.deleteProductWithCatId(id);
+
         String sql = "delete from category where id = ?;";
         jdbcTemplate.update(sql, id);
         return 0;
